@@ -43,9 +43,9 @@ class Accordion extends Component {
     };
   }
 
-  handleAddTask = () => {
+  handleAddTask = mentorId => {
     this.setState({ addTask: false });
-    let value = document.getElementById("task_input").value;
+    let value = document.getElementById("task_input-" + mentorId).value;
     this.props.handleAddTask(this.state.email, value);
   };
 
@@ -55,11 +55,11 @@ class Accordion extends Component {
     });
   };
 
-  renderInputBox = () => {
+  renderInputBox = mentorId => {
     return (
       <Li display={this.state.addTask ? "block" : "none"}>
-        <Input type="text" id="task_input" />
-        <Button onClick={this.handleAddTask}>Add</Button>
+        <Input type="text" id={`task_input-${mentorId}`} />
+        <Button onClick={() => this.handleAddTask(mentorId)}>Add</Button>
       </Li>
     );
   };
@@ -93,7 +93,7 @@ class Accordion extends Component {
             Assign a New Task{" "}
             <ActionButton onClick={this.handleAddClick}>+</ActionButton>
           </Li>
-          {this.renderInputBox()}
+          {this.renderInputBox(mentorId)}
         </Ul>
       </Details>
     );

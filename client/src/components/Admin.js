@@ -48,7 +48,12 @@ class Admin extends Component {
       .then(res => res.json())
       .then(response => {
         if (response.success) {
-          let data = this.state.data.findIndex(obj => obj.email === email);
+          let dataIndex = this.state.data.findIndex(obj => obj.email === email);
+          let data = this.state.data[dataIndex];
+          let taskIndex = data.Task.findIndex(obj => obj.taskId === taskId);
+          data.Task.splice(taskIndex, 1);
+          this.state.data[dataIndex] = data;
+          this.setState({ data: [...this.state.data] });
         }
       });
   };
