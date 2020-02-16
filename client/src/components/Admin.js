@@ -98,14 +98,8 @@ class Admin extends Component {
       .then(response => {
         if (response.success) {
           this.setState({
-            data: [
-              ...this.state.data,
-              {
-                name: response.result.name,
-                email: response.result.email,
-                mentorId: response.result.mentorId
-              }
-            ]
+            data: [...this.state.data, { ...response.result }],
+            addMentor: false
           });
         }
       });
