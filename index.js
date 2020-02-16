@@ -19,6 +19,15 @@ router.use((req, res, next) => {
 app.use(router);
 routes(router);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
 router.get("/", (req, res) => {
   console.log("in home", req.query.name);
   res.status(200).send("Ok");

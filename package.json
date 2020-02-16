@@ -6,6 +6,7 @@
   "scripts": {
     "client": "cd client && npm run start",
     "server": "node index",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "debug-server": "node --inspect-brk index",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "start-debug": "concurrently \"npm run debug-server\" \"npm run client\"",
